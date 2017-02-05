@@ -1,0 +1,16 @@
+Feature,Type,Description
+dealer_open,Int,The card we can see
+dealer_initial,Int,The dealer's starting points
+dealer_hit,Binary,"1 - dealer hit, 0 - dealer did not hit"
+dealer_num_hits,Int,Number of times the dealer hit
+dealer_final,Int,The dealer's final points
+dealer_hand,Obj,"List of the dealer's cards, in the order that they were dealt"
+player_inital,Int,The player's starting points
+player_hit,Binary,"1 - player hit, 0 - player did not hit"
+player_num_hits,Int,Number of times the player hit
+player_final,Int,The player's final points
+player_hand,Obj,"List of the player's cards, in the order that they were dealt"
+player_loses,Binary,"1 - player lost, 0 - player did not lose"
+draw,Binary,"1 - draw, 0 - not a draw"
+player_wins,Binary,"1 - player won, 0 - player did not win"
+strategy,Binary,"1 - recommended, 0 - random"
