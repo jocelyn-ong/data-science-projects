@@ -1,4 +1,5 @@
 Feature,Type,Description
+num_decks,Int,Number of decks used
 dealer_open,Int,The card we can see
 dealer_initial,Int,The dealer's starting points
 dealer_hit,Binary,"1 - dealer hit, 0 - dealer did not hit"
