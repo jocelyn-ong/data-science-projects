@@ -47,6 +47,8 @@ def calculate_points(hand):
             points += 1
     return points
 
+data_dictionary = pd.read_csv("data_dictionary.csv")
+
 def sim_game(num_decks=1, strategy=0):
     game_deck = Deck(num_decks=num_decks)
     game_deck.shuffle()
@@ -157,23 +159,19 @@ def gen_data(num_decks=1, df_size=5000, strategy=0):
     return np.array([sim_game(num_decks=num_decks, strategy=0) for _ in range(df_size)])
 
 def gen_df(data):
-    tmp = pd.DataFrame(data, columns=['num_decks', 'dealer_open', 'dealer_initial', 'dealer_hit',
-       'dealer_num_hits', 'dealer_final', 'dealer_busts', 'player_inital',
-       'player_hit', 'player_num_hits', 'player_final', 'player_busts',
-       'player_loses', 'draw', 'player_wins', 'strategy', 'dealer_hand',
-       'player_hand'])
+    tmp = pd.DataFrame(data, columns=data_dictionary.Feature.values)
     tmp[tmp.columns.values[:-2]] = tmp[tmp.columns.values[:-2]].astype(int)
     return tmp
 
-# df = gen_df(gen_data(num_decks=4))
-# sub = gen_df(gen_data(num_decks=4, strategy=1))
-# df = pd.concat([df,sub])
-#
-# # Combine old files
-# old_df = pd.read_csv("blackjack.csv")
-# df = pd.concat([old_df, df])
-#
-# df.to_csv("blackjack.csv", index=False)
-
 if __name__ == '__main__':
-    print ("This will run.")
+    df = gen_df(gen_data(num_decks=4))
+    sub = gen_df(gen_data(num_decks=4, strategy=1))
+    df = pd.concat([df,sub])
+
+    # Combine old files
+    try:
+        old_df = pd.read_csv("test.csv")
+        df = pd.concat([old_df, df])
+    except:
+        pass
+    df.to_csv("test.csv", index=False)
