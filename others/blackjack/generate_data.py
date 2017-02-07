@@ -170,8 +170,8 @@ if __name__ == '__main__':
 
     # Combine old files
     try:
-        old_df = pd.read_csv("test.csv")
+        old_df = pd.read_csv("blackjack.csv")
         df = pd.concat([old_df, df])
     except:
         pass
-    df.to_csv("test.csv", index=False)
+    df.to_csv("blackjack.csv", index=False)
