@@ -92,20 +92,23 @@ def sim_game(num_decks=1, strategy=0):
 
         # If player <= 11, hit
         while calculate_points(player_hand.copy()) <= 11:
-            player_hit += 1
+            player_hit = 1
+            player_num_hits += 1
             game_deck.deal(player_hand)
 
         # If strategy is random, randomize hit for 18 and below
         if strategy == 0:
             while calculate_points(player_hand.copy()) <= 18:
                 if np.random.random() < 0.5:
-                    player_hit += 1
+                    player_hit = 1
+                    player_num_hits += 1
                     game_deck.deal(player_hand)
         # If strategy is recommended, stand on 17 and above
         else:
-            while calculate_points(player_hand.copy()) <= 16:
-                if dealer_open <= 6:
-                    player_hit += 1
+            if dealer_open <= 6:
+                while calculate_points(player_hand.copy()) <= 16:
+                    player_hit = 1
+                    player_num_hits += 1
                     game_deck.deal(player_hand)
 
         # update player's final and busts
@@ -117,7 +120,8 @@ def sim_game(num_decks=1, strategy=0):
         if not player_busts:
             # If dealer < 17, hit
             while calculate_points(dealer_hand.copy()) < 17:
-                dealer_hit += 1
+                dealer_hit = 1
+                dealer_num_hits += 1
                 game_deck.deal(dealer_hand)
 
             # If dealer has a soft 17, hit
@@ -126,7 +130,8 @@ def sim_game(num_decks=1, strategy=0):
                     dealer_copy = dealer_hand.copy()
                     dealer_copy.remove("A")
                     if calculate_points(dealer_copy.copy()) == 6:
-                        dealer_hit += 1
+                        dealer_hit = 1
+                        dealer_num_hits += 1
                         game_deck.deal(dealer_hand)
 
         # update dealer's final and busts
@@ -156,7 +161,7 @@ def sim_game(num_decks=1, strategy=0):
     return np.array([num_decks, dealer_open, dealer_initial, dealer_hit, dealer_num_hits, dealer_final, int(dealer_busts),             player_initial, player_hit, player_num_hits, player_final, int(player_busts),             player_loses, draw, player_wins, strategy, str(dealer_hand), str(player_hand)])
 
 def gen_data(num_decks=1, df_size=5000, strategy=0):
-    return np.array([sim_game(num_decks=num_decks, strategy=0) for _ in range(df_size)])
+    return np.array([sim_game(num_decks=num_decks, strategy=strategy) for _ in range(df_size)])
 
 def gen_df(data):
     tmp = pd.DataFrame(data, columns=data_dictionary.Feature.values)
