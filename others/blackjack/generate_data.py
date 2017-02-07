@@ -47,8 +47,6 @@ def calculate_points(hand):
             points += 1
     return points
 
-data_dictionary = pd.read_csv("data_dictionary.csv")
-
 def sim_game(num_decks=1, strategy=0):
     game_deck = Deck(num_decks=num_decks)
     game_deck.shuffle()
@@ -159,7 +157,11 @@ def gen_data(num_decks=1, df_size=5000, strategy=0):
     return np.array([sim_game(num_decks=num_decks, strategy=0) for _ in range(df_size)])
 
 def gen_df(data):
-    tmp = pd.DataFrame(data, columns=data_dictionary.Feature.values)
+    tmp = pd.DataFrame(data, columns=['num_decks', 'dealer_open', 'dealer_initial', 'dealer_hit',
+       'dealer_num_hits', 'dealer_final', 'dealer_busts', 'player_inital',
+       'player_hit', 'player_num_hits', 'player_final', 'player_busts',
+       'player_loses', 'draw', 'player_wins', 'strategy', 'dealer_hand',
+       'player_hand'])
     tmp[tmp.columns.values[:-2]] = tmp[tmp.columns.values[:-2]].astype(int)
     return tmp
 
