@@ -69,11 +69,19 @@ def sim_game(num_decks=1, strategy=0):
     # get dealer open card
     dealer_open = dealer_hand[0]
 
+    # get card one from player
+    player_card_one = player_hand[0]
+
     # Change it to numerics
     if dealer_open in ["J", "Q", "K"]:
         dealer_open = 10
     elif dealer_open == "A":
         dealer_open = 1
+
+    if player_card_one in ["J", "Q", "K"]:
+        player_card_one = 10
+    elif player_card_one == "A":
+        player_card_one = 1
 
     dealer_hit = 0
     dealer_num_hits = 0
@@ -158,7 +166,7 @@ def sim_game(num_decks=1, strategy=0):
     elif player_final == dealer_final:
         draw = 1
 
-    return np.array([num_decks, dealer_open, dealer_initial, dealer_hit, dealer_num_hits, dealer_final, int(dealer_busts),             player_initial, player_hit, player_num_hits, player_final, int(player_busts),             player_loses, draw, player_wins, strategy, str(dealer_hand), str(player_hand)])
+    return np.array([num_decks, dealer_open, dealer_initial, dealer_hit, dealer_num_hits, dealer_final, int(dealer_busts), player_card_one, player_initial, player_hit, player_num_hits, player_final, int(player_busts),             player_loses, draw, player_wins, strategy, str(dealer_hand), str(player_hand)])
 
 def gen_data(num_decks=1, df_size=5000, strategy=0):
     return np.array([sim_game(num_decks=num_decks, strategy=strategy) for _ in range(df_size)])
