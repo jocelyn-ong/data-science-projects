@@ -6,7 +6,7 @@ dealer_hit,Binary,"1 - dealer hit, 0 - dealer did not hit"
 dealer_num_hits,Int,Number of times the dealer hit
 dealer_final,Int,The dealer's final points
 dealer_busts,Binary,"1 - dealer busts, 0 - dealer did not bust"
-player_inital,Int,The player's starting points
+player_initial,Int,The player's starting points
 player_hit,Binary,"1 - player hit, 0 - player did not hit"
 player_num_hits,Int,Number of times the player hit
 player_final,Int,The player's final points
