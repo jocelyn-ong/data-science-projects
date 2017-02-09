@@ -69,7 +69,7 @@ def sim_game(num_decks=1, strategy=0):
     # get dealer open card
     dealer_open = dealer_hand[0]
 
-    # get card one from player
+    # get cards from player
     player_card_one = player_hand[0]
     player_card_two = player_hand[1]
 
@@ -156,6 +156,17 @@ def sim_game(num_decks=1, strategy=0):
     draw = 0
     player_wins = 0
 
+    # Get three card totals
+    if len(player_hand) >= 3:
+        player_3_card = calculate_points(player_hand.copy()[:3])
+    else:
+        player_3_card = calculate_points(player_hand.copy())
+
+    if len(dealer_hand) >= 3:
+        dealer_3_card = calculate_points(dealer_hand.copy()[:3])
+    else:
+        dealer_3_card = calculate_points(dealer_hand.copy())
+
     # Check who wins
     if player_initial == 21 and dealer_initial != 21:
         player_wins = 1
@@ -172,7 +183,7 @@ def sim_game(num_decks=1, strategy=0):
     elif player_final == dealer_final:
         draw = 1
 
-    return np.array([num_decks, dealer_open, dealer_initial, dealer_hit, dealer_num_hits, dealer_final, int(dealer_busts), player_card_one, player_card_two, player_initial, player_hit, player_num_hits, player_final, int(player_busts),             player_loses, draw, player_wins, strategy, str(dealer_hand), str(player_hand)])
+    return np.array([num_decks, dealer_open, dealer_initial, dealer_hit, dealer_num_hits, dealer_3_card, ealer_final, int(dealer_busts), player_card_one, player_card_two, player_initial, player_hit, player_num_hits, player_3_card, player_final, int(player_busts), player_loses, draw, player_wins, strategy, str(dealer_hand), str(player_hand)])
 
 def gen_data(num_decks=1, df_size=5000, strategy=0):
     return np.array([sim_game(num_decks=num_decks, strategy=strategy) for _ in range(df_size)])
