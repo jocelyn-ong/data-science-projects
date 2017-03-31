@@ -1,0 +1,20 @@
+feature, description
+d_hand, Dealer's starting hand
+d_final_hand, Dealer's ending hand
+p_hand, Player's starting hand
+p_final_hand, Player's ending hand
+strategy, 0=random strategy 1=recommended strategy
+split, 0=no split 1=split
+num_decks, Number of decks
+soft_17, 0=dealer to stand on all 17 1=dealer to hit on soft 17
+game_type, 0=continuous shuffling 1=no reshuffling until end of deck
+d_open, Dealer's open card
+d_initial, Dealer's starting points
+d_final, Dealer's ending points
+d_hit, 0=dealer didn't hit 1=dealer hit
+d_bust, 0=dealer didn't bust 1=dealer bust
+p_initial, Player's starting points
+p_final, Player's ending points
+p_hit, 0=player didn't hit 1=player hit
+p_bust, 0=player didn't bust 1=player bust
+p_win, 0=player didn't win 1=player won
